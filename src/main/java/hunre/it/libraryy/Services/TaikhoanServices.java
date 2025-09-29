@@ -9,13 +9,19 @@ import hunre.it.libraryy.Responitory.TaikhoanReponsitory;
 
 @Service
 public class TaikhoanServices implements UserDetailsService {
+	
 	@Autowired
 	private TaikhoanReponsitory repo;
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		Taikhoan tk = repo.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("User not found"));
-		return User.builder().username(tk.getUsername()).password(tk.getPassword()).roles("ADMIN").build();
+		Taikhoan tk = repo.findByUsername(username)
+				.orElseThrow(() -> new UsernameNotFoundException("User not found"));
+		return User.builder()
+				.username(tk.getUsername())
+				.password(tk.getPassword())
+				.roles("ADMIN")
+				.build();
 	}
 
 }

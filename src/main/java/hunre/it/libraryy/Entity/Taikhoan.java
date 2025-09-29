@@ -16,9 +16,11 @@ public class Taikhoan {
 	private String username;
 	@Column(name = "password",nullable = false)
 	private String password;
+	
 	public Taikhoan() {
-		super();
+		
 	}
+	
 	public Taikhoan(Long id, String username, String password) {
 		super();
 		this.id = id;

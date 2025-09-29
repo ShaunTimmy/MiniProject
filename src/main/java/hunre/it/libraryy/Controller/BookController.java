@@ -17,12 +17,16 @@ import hunre.it.libraryy.Services.BookService;
 
 @Controller
 public class BookController {
+	
 	@Autowired
 	public BookService service;
+	
 	@Autowired
 	public BookReponsitory repo;
+	
 	@Autowired
 	private BCryptPasswordEncoder encoder;
+	
 	@Autowired
 	private TaikhoanReponsitory taikhoanReponsitory;
 
