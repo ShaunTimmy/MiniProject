@@ -27,26 +27,17 @@ public class SecurityConfig {
 		authProvider.setPasswordEncoder(passBcry());
 		return authProvider;
 	}
+
 	@Bean
-	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
-		http.authorizeHttpRequests(auth->auth
-				.requestMatchers("/login",  "/register","/thuvien/search","/css/**").permitAll()
-				.anyRequest().authenticated()
-				)
-		.formLogin(form-> form
-				.loginPage("/login")
-				.defaultSuccessUrl("/thuvien", true)
-				.permitAll()
-				)
-		
-		.logout(logout->logout
-				.logoutUrl("/logout")
-				.logoutSuccessUrl("/login?logout")
-				.permitAll())
-		.csrf(csrf -> csrf
-	            .ignoringRequestMatchers("/thuvien/search") // loại bỏ CSRF nếu cần POST
-	    );
-			
+	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+		http.authorizeHttpRequests(auth -> auth.requestMatchers("/login", "/register", "/thuvien/search", "/css/**")
+				.permitAll().anyRequest().authenticated())
+				.formLogin(form -> form.loginPage("/login").defaultSuccessUrl("/thuvien", true).permitAll())
+
+				.logout(logout -> logout.logoutUrl("/logout").logoutSuccessUrl("/login?logout").permitAll())
+				.csrf(csrf -> csrf.ignoringRequestMatchers("/thuvien/search") // loại bỏ CSRF nếu cần POST
+				);
+
 		return http.build();
 	}
 }
