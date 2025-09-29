@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Quản Lý Thư Viện</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+ crossorigin="anonymous">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Hệ thống Quản Trị Viên </a>
+        <div class="d-flex">
+            <form th:action="@{/logout}" method="post">
+    <button type="submit" class="btn btn-dark mt-3">Đăng xuất</button>
+    </form>
+        </div>
+    </div>
+</nav>
+<div class="container mt-5">
+    <h2 class="mb-4">Quản Lý Thư Viện</h2>
+     <!-- Nút Thêm mới -->
+    <a class="btn btn-primary mb-3" th:href="@{/thuvien/add}">Thêm mới </a>
+     <!-- Form Tìm kiếm -->
+    <form th:action="@{/thuvien/search}" method="get" class="mb-4 d-flex align-items-center gap-2">
+    <input type="text" name="keyword" class="form-control" placeholder="Nhập mã tài liệu"
+           th:value="${param.keyword}" style="width: 200px;"> <br>
+    <button type="submit" class="btn btn-success">Tìm kiếm</button>
+</form>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Mã sách </th>
+                <th scope="col">Tên sách</th>
+              <th scope="col">Thể loại</th>
+                <th scope="col">Tóm tắt</th>
+                 <th scope="col">Số lượng </th>
+                <th scope="col">Giá</th>
+              <th scope="col">Tác giả</th>
+                <th scope="col">NXB</th>
+                 <th scope="col">Năm XB</th>
+                  <th scope="col">Quản Lý </th>
+            </tr>
+        </thead>
+        <tbody>
+          
+            <tr th:each="tl : ${sach}">
+                <td th:text="${tl.masach}"></td> 
+                <td th:text="${tl.ten}"></td> 
+                <td th:text="${tl.danhmuc}"></td>  
+                <td th:text="${tl.noidung}"></td> 
+                  <td th:text="${tl.slg}"></td> 
+                <td th:text="${tl.gia}"></td> 
+                <td th:text="${tl.tgia}"></td>  
+                <td th:text="${tl.nxb}"></td> 
+                <td th:text="${tl.namxb}"></td> 
+              <td>
+    <a th:href="@{'/thuvien/edit/' + ${tl.id}}" class="btn btn-warning btn-sm">Sửa</a>
+    <a th:href="@{'/thuvien/delete/' + ${tl.id}}" class="btn btn-danger btn-sm" 
+       onclick="return confirm('Bạn có chắc chắn muốn xóa?')">Xóa</a>
+</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
